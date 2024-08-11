@@ -49,9 +49,7 @@ public abstract class Animal {
         this.health = health;
     }
 
-    public int getLifeExpectancy() {
-        return lifeExpectancy;
-    }
+    public abstract int getLifeExpectancy();
 
     public void setLifeExpectancy(int lifeExpectancy) {
         this.lifeExpectancy = lifeExpectancy;
@@ -65,14 +63,10 @@ for(String eat:foods) {
         return false;
 
     }
-    public void eat() {
-
-    }
+    public abstract void eat();
     public void decreaseHealth() {
     }
-    public void treat() {
-
-    }
+    public abstract void treat();
 
 
     public abstract boolean aMonthPasses();
