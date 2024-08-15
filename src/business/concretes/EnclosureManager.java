@@ -1,8 +1,8 @@
 package business.concretes;
 
-import business.abstracts.AnimalService;
 import business.abstracts.EnclosureService;
-import entities.Animal;
+import animals.Animal;
+import exceptions.NoAnimal;
 import exceptions.TooMuchAnimals;
 
 import java.util.ArrayList;
@@ -25,12 +25,41 @@ public class EnclosureManager implements EnclosureService {
     }
 
     @Override
-    public void removeAnimal(Animal animal) {
-        animalList.remove(animal);
+    public void removeAnimal(Animal animal) throws NoAnimal {
+        if(!animalList.isEmpty()) {
+            animalList.remove(animal);
+        }
+        else {
+            throw new NoAnimal("There isn't any animal");
+        }
     }
 
     @Override
     public int size() {
         return animalList.size();
     }
+
+    @Override
+    public void addWaste(int wasteNew) {
+waste+=wasteNew;
+        System.out.println("Current waste:"+wasteNew+" Total:"+waste);
+    }
+
+    @Override
+    public void removeWaste(int wasteRemove) {
+        if (waste>0 && waste>wasteRemove) {
+            waste -= wasteRemove;
+        }else {
+            waste=0;
+        }
+
+    }
+
+    @Override
+    public void aMonthPasses() {
+for(Animal animal:animalList) {
+    animal.aMonthPasses();
+}
+    }
+
 }

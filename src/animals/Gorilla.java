@@ -1,13 +1,13 @@
-package entities;
+package animals;
 
-public class Chimpanzee extends Ape{
+public class Gorilla extends Ape{
     @Override
     public int getLifeExpectancy() {
-        return 24;
+        return 32;
     }
-    public int playChase() {
+    public int painting() {
         if (checkHealth()) {
-            setHealth(getHealth()+3);
+            setHealth(getHealth()+4);
             return getHealth();
         }
         return getHealth();
@@ -15,7 +15,7 @@ public class Chimpanzee extends Ape{
 
     @Override
     public void treat() {
-        if(playChase()<10) System.out.println(getHealth());
+        if(painting()<10) System.out.println(getHealth());
         else System.out.println(10);
     }
 }

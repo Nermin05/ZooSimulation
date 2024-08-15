@@ -1,4 +1,4 @@
-package entities;
+package animals;
 
 public abstract class Animal {
   private   int age;
@@ -68,6 +68,7 @@ for(String eat:foods) {
 
     }
     public void decreaseHealth() {
+
     }
     public abstract void treat();
 

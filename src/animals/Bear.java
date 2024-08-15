@@ -1,23 +1,23 @@
-package entities;
+package animals;
 
 import enums.Foods;
 
-public class Penguin extends Animal{
+public class Bear extends Animal{
     @Override
     public void setFoods(String[] foods) {
-        foods= new String[]{Foods.ICE_CREAM.name(), Foods.FISH.name()};
+        foods= new String[]{Foods.STEAK.name(), Foods.FISH.name()};
         for(String food:foods) {
-            System.out.println("Penguin can eat:"+food);
+            System.out.println("Bear can eat:"+food);
         }
     }
 
     @Override
     public int getLifeExpectancy() {
-        return 15;
+        return 18;
     }
-    public int watchAFilm() {
+    public int hug() {
         if (checkHealth()) {
-            setHealth(getHealth()+2);
+            setHealth(getHealth()+3);
             return getHealth();
         }
         return getHealth();
@@ -25,7 +25,7 @@ public class Penguin extends Animal{
 
     @Override
     public void treat() {
-        if(watchAFilm()<10) System.out.println(getHealth());
+        if(hug()<10) System.out.println(getHealth());
         else System.out.println(10);
     }
 

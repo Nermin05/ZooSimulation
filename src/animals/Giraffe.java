@@ -1,4 +1,4 @@
-package entities;
+package animals;
 
 import enums.Foods;
 

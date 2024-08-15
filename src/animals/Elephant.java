@@ -1,8 +1,6 @@
-package entities;
+package animals;
 
 import enums.Foods;
-
-import java.util.function.Predicate;
 
 public class Elephant extends Animal{
     @Override

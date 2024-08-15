@@ -1,4 +1,4 @@
-package entities;
+package animals;
 
 public class Tiger extends BigCat{
     @Override
