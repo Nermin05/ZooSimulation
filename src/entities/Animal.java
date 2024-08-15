@@ -37,9 +37,7 @@ public abstract class Animal {
         return foods;
     }
 
-    public void setFoods(String[] foods) {
-        this.foods = foods;
-    }
+    public abstract void setFoods(String[] foods);
 
     public int getHealth() {
         return health;
@@ -63,7 +61,12 @@ for(String eat:foods) {
         return false;
 
     }
-    public abstract void eat();
+    public boolean checkHealth() {
+        return health < 10;
+    }
+    public  void eat(){
+
+    }
     public void decreaseHealth() {
     }
     public abstract void treat();

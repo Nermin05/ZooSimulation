@@ -1,14 +1,19 @@
 package entities;
 
-public class Ape extends Animal{
+import enums.Foods;
+
+public abstract class Ape extends Animal{
     @Override
-    public int getLifeExpectancy() {
-        return 0;
+    public void setFoods(String[] foods) {
+        foods= new String[]{Foods.FRUIT.name(), Foods.ICE_CREAM.name()};
+        for(String food:foods) {
+            System.out.println("Can eat:"+food);
+        }
     }
 
     @Override
-    public void eat() {
-
+    public int getLifeExpectancy() {
+        return 0;
     }
 
     @Override
