@@ -4,11 +4,9 @@ import enums.Foods;
 
 public abstract class BigCat extends Animal {
     @Override
-    public void setFoods(String[] foods) {
-    foods= new String[]{Foods.STEAK.name(), Foods.CELERY.name()};
-    for(String food:foods) {
-        System.out.println("Can eat:"+food);
-    }
+    public void setFoods(Foods foods) {
+        System.out.println("Can eat:"+Foods.STEAK+" "+ Foods.CELERY);
+
     }
 
     @Override

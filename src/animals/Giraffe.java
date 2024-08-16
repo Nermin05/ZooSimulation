@@ -4,17 +4,21 @@ import enums.Foods;
 
 public class Giraffe extends Animal{
     @Override
-    public void setFoods(String[] foods) {
-        foods= new String[]{Foods.HAY.name(), Foods.FRUIT.name()};
-        for(String food:foods) {
-            System.out.println("Giraffe can eat:"+food);
-        }
+    public void setFoods(Foods foods) {
+            System.out.println("Giraffe can eat:"+Foods.HAY+"," +Foods.FRUIT);
+
     }
 
     @Override
     public int getLifeExpectancy() {
         return 28;
     }
+
+    @Override
+    public boolean eat(boolean ifEat) {
+        return ifEat;
+    }
+
     public int neckMessage() {
         if (checkHealth()) {
             setHealth(getHealth()+4);

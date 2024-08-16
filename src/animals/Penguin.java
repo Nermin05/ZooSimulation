@@ -4,17 +4,21 @@ import enums.Foods;
 
 public class Penguin extends Animal{
     @Override
-    public void setFoods(String[] foods) {
-        foods= new String[]{Foods.ICE_CREAM.name(), Foods.FISH.name()};
-        for(String food:foods) {
-            System.out.println("Penguin can eat:"+food);
-        }
+    public void setFoods(Foods foods) {
+            System.out.println("Penguin can eat:"+Foods.ICE_CREAM+","+ Foods.FISH);
+
     }
 
     @Override
     public int getLifeExpectancy() {
         return 15;
     }
+
+    @Override
+    public boolean eat(boolean ifEat) {
+        return ifEat;
+    }
+
     public int watchAFilm() {
         if (checkHealth()) {
             setHealth(getHealth()+2);

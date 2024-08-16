@@ -10,4 +10,9 @@ public class Lion extends BigCat{
         }
         return getHealth();
     }
+
+    @Override
+    public boolean eat(boolean ifEat) {
+        return ifEat;
+    }
 }

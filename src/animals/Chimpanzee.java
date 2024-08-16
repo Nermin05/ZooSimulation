@@ -5,6 +5,12 @@ public class Chimpanzee extends Ape{
     public int getLifeExpectancy() {
         return 24;
     }
+
+    @Override
+    public boolean eat(boolean ifEat) {
+        return ifEat;
+    }
+
     public int playChase() {
         if (checkHealth()) {
             setHealth(getHealth()+3);

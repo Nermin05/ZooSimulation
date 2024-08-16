@@ -5,6 +5,12 @@ public class Gorilla extends Ape{
     public int getLifeExpectancy() {
         return 32;
     }
+
+    @Override
+    public boolean eat(boolean ifEat) {
+        return ifEat;
+    }
+
     public int painting() {
         if (checkHealth()) {
             setHealth(getHealth()+4);

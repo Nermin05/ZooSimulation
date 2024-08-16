@@ -2,6 +2,8 @@ package business.concretes;
 
 import business.abstracts.EnclosureService;
 import animals.Animal;
+import enums.Foods;
+import exceptions.HasNoFood;
 import exceptions.NoAnimal;
 import exceptions.TooMuchAnimals;
 
@@ -36,13 +38,44 @@ public class EnclosureManager implements EnclosureService {
 
     @Override
     public int size() {
+        System.out.print("Animals' count:");
         return animalList.size();
     }
 
     @Override
     public void addWaste(int wasteNew) {
-waste+=wasteNew;
-        System.out.println("Current waste:"+wasteNew+" Total:"+waste);
+        boolean animalEat=false;
+        for(Animal animal:animalList) {
+            if (animal.eat(true)) {
+animalEat=true;
+            }
+        }
+        if(animalEat) {
+            waste+=wasteNew;
+        }
+        System.out.println("Waste:"+waste);
+    }
+
+    @Override
+    public void currentWaste() throws HasNoFood {
+        int wasteNew=0;
+        boolean hasFood=false;
+        for(Animal animal1:animalList) {
+            if(animal1.eat(true)) {
+                Foods food=animal1.getFoods();
+if(food!=null) {
+    wasteNew += animal1.getFoods().getWaste();
+    hasFood=true;
+}else {
+    throw new HasNoFood(animal1+" has no food!");
+}
+            }
+        }
+        if (!hasFood) {
+            throw new HasNoFood("No animals had food to process.");
+        }
+        waste+=wasteNew;
+        System.out.println("Current waste:"+waste);
     }
 
     @Override
@@ -52,6 +85,7 @@ waste+=wasteNew;
         }else {
             waste=0;
         }
+        System.out.println("Current waste:"+waste);
 
     }
 

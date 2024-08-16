@@ -1,15 +1,17 @@
 package animals;
 
+import enums.Foods;
+
 public abstract class Animal {
   private   int age;
     private char gender;
-    private String[] foods;
+    private Foods foods;
     private int health;
     private int lifeExpectancy;
     public Animal() {
     }
 
-    public Animal(int age, char gender, String[] foods, int health, int lifeExpectancy) {
+    public Animal(int age, char gender, Foods foods, int health, int lifeExpectancy) {
         this.age = age;
         this.gender = gender;
         this.foods = foods;
@@ -33,11 +35,11 @@ public abstract class Animal {
         this.gender = gender;
     }
 
-    public String[] getFoods() {
+    public Foods getFoods() {
         return foods;
     }
 
-    public abstract void setFoods(String[] foods);
+    public abstract void setFoods(Foods foods);
 
     public int getHealth() {
         return health;
@@ -53,8 +55,8 @@ public abstract class Animal {
         this.lifeExpectancy = lifeExpectancy;
     }
     public boolean canEat(String meal) {
-for(String eat:foods) {
-    if(eat.equalsIgnoreCase(meal)) {
+for(Foods eat:Foods.values()) {
+    if(eat.name().equalsIgnoreCase(meal)) {
         return true;
     }
 }
@@ -64,9 +66,7 @@ for(String eat:foods) {
     public boolean checkHealth() {
         return health < 10;
     }
-    public  void eat(){
-
-    }
+    public abstract  boolean eat(boolean ifEat);
     public void decreaseHealth() {
 
     }

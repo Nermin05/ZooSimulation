@@ -9,4 +9,9 @@ public class Tiger extends BigCat{
         }
         return getHealth();
     }
+
+    @Override
+    public boolean eat(boolean ifEat) {
+       return ifEat;
+    }
 }
