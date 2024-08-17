@@ -3,8 +3,7 @@ package business.concretes;
 import business.abstracts.FoodStoreService;
 import enums.Foods;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class FoodStoreManager implements FoodStoreService {
     @Override
@@ -12,13 +11,13 @@ public class FoodStoreManager implements FoodStoreService {
         boolean found=false;
         for(Foods food2:Foods.values()) {
             if (food2.name().equalsIgnoreCase(food)) {
-                System.out.println(count + " dene " + food + " elave olundu!");
+                System.out.println(count + " food added!");
                 found=true;
                 break;
             }
         }
         if(!found) {
-            System.out.println("Bele bir yemek yoxdur!");
+            System.out.println("There isn't any food like that!");
         }
    }
 
@@ -27,14 +26,19 @@ public class FoodStoreManager implements FoodStoreService {
         boolean found=false;
         for (Foods food2 : Foods.values()) {
             if (food2.name().equalsIgnoreCase(food)) {
-                System.out.println("Tapildi:"+food2.name());
+                System.out.println("Found:"+food2.name());
                 found = true;
                 break;
             }
         }
         if (!found) {
-            System.out.println("Bele bir yemek yoxdur!");
+            System.out.println("There isn't any food like that!");
         }
+    }
+    public void restock() {
+        List<Foods> foodsList=new ArrayList<>();
+        foodsList.addAll(Arrays.asList(Foods.values()));
+        System.out.println("Successfully updated!");
     }
     }
 

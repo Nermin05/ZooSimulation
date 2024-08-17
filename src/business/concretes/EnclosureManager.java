@@ -12,9 +12,26 @@ import java.util.List;
 
 public class EnclosureManager implements EnclosureService {
     List<Animal> animalList;
-    int waste=0;
+    List<Foods>  foodsList;
+  private int waste=0;
+  FoodStoreManager foodStoreManager;
     public EnclosureManager() {
     animalList=new ArrayList<>();
+    foodsList=new ArrayList<>();
+    }
+
+    public EnclosureManager(List<Animal> animalList, FoodStoreManager foodStore, int waste) {
+        this.animalList=animalList;
+        this.foodStoreManager=foodStore;
+        this.waste=waste;
+    }
+
+    public int getWaste() {
+        return waste;
+    }
+
+    public void setWaste(int waste) {
+        this.waste = waste;
     }
 
     @Override
@@ -56,27 +73,29 @@ animalEat=true;
         System.out.println("Waste:"+waste);
     }
 
-    @Override
-    public void currentWaste() throws HasNoFood {
-        int wasteNew=0;
-        boolean hasFood=false;
-        for(Animal animal1:animalList) {
-            if(animal1.eat(true)) {
-                Foods food=animal1.getFoods();
-if(food!=null) {
-    wasteNew += animal1.getFoods().getWaste();
-    hasFood=true;
-}else {
-    throw new HasNoFood(animal1+" has no food!");
-}
+    public int currentWaste() throws HasNoFood {
+        int wasteNew = 0;
+        boolean hasFood = false;
+        for (Animal animal1 : animalList) {
+            System.out.println("Processing animal: " + animal1);
+            List<Foods> edibleFoods = animal1.edibleFoods();
+            if (!edibleFoods.isEmpty()) {
+                Foods food = edibleFoods.get(0);
+                System.out.println("Animal has food: " + food);
+                wasteNew += food.getWaste();
+                hasFood = true;
+            } else {
+                throw new HasNoFood(animal1 + " has no food!");
             }
         }
         if (!hasFood) {
             throw new HasNoFood("No animals had food to process.");
         }
-        waste+=wasteNew;
-        System.out.println("Current waste:"+waste);
+        waste += wasteNew;
+        return waste;
     }
+
+
 
     @Override
     public void removeWaste(int wasteRemove) {
@@ -87,6 +106,16 @@ if(food!=null) {
         }
         System.out.println("Current waste:"+waste);
 
+    }
+
+    @Override
+    public int getWasteSize() {
+        return waste;
+    }
+
+    @Override
+    public void getFoodStore(Foods foodsNew) {
+    foodsList.add(foodsNew);
     }
 
     @Override

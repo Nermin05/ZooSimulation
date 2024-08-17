@@ -2,11 +2,12 @@ package animals;
 
 import enums.Foods;
 
-public class Penguin extends Animal{
-    @Override
-    public void setFoods(Foods foods) {
-            System.out.println("Penguin can eat:"+Foods.ICE_CREAM+","+ Foods.FISH);
+import java.util.ArrayList;
+import java.util.List;
 
+public class Penguin extends Animal{
+    public Penguin(int age, char gender, int health, int lifeExpectancy) {
+        super(age, gender, health, lifeExpectancy);
     }
 
     @Override
@@ -34,7 +35,28 @@ public class Penguin extends Animal{
     }
 
     @Override
+    public List<Foods> edibleFoods() {
+        List<Foods> edible = new ArrayList<>();
+        if (canEat("FISH")) {
+            edible.add(Foods.FISH);
+        }
+        if (canEat("ICE CREAM")) {
+            edible.add(Foods.ICE_CREAM);
+        }
+        return edible;    }
+
+    @Override
     public boolean aMonthPasses() {
-        return false;
+        if (getHealth() < 4) {
+            System.out.println("The penguin is in poor health");
+            return false;
+        }
+        System.out.println("The penguin is excellent");
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "Penguin";
     }
 }

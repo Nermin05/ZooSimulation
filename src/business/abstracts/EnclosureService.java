@@ -1,16 +1,21 @@
 package business.abstracts;
 
 import animals.Animal;
+import enums.Foods;
 import exceptions.HasNoFood;
 import exceptions.NoAnimal;
 import exceptions.TooMuchAnimals;
+
+import java.util.List;
 
 public interface EnclosureService {
     void addAnimal(Animal animal) throws TooMuchAnimals;
     void removeAnimal(Animal animal) throws NoAnimal;
     int size();
     void addWaste(int waste);
-    void currentWaste() throws HasNoFood;
+    int currentWaste() throws HasNoFood;
     void removeWaste(int waste);
+    int getWasteSize();
+    void getFoodStore(Foods foodsNew);
     void aMonthPasses();
 }

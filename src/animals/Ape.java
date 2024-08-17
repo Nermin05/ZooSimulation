@@ -3,10 +3,8 @@ package animals;
 import enums.Foods;
 
 public abstract class Ape extends Animal{
-    @Override
-    public void setFoods(Foods foods) {
-            System.out.println("Can eat:"+Foods.FRUIT+","+ Foods.ICE_CREAM);
-
+    public Ape(int age, char gender, int health, int lifeExpectancy) {
+        super(age, gender, health, lifeExpectancy);
     }
 
     @Override
@@ -21,6 +19,10 @@ public abstract class Ape extends Animal{
 
     @Override
     public boolean aMonthPasses() {
-        return false;
-    }
+        if (getHealth() < 5) {
+            System.out.println("The type of ape is in poor health");
+            return false;
+        }
+        System.out.println("The type of ape is excellent");
+        return true;    }
 }

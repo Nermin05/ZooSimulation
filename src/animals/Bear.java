@@ -2,11 +2,12 @@ package animals;
 
 import enums.Foods;
 
-public class Bear extends Animal{
-    @Override
-    public void setFoods(Foods foods) {
-            System.out.println("Bear can eat:"+Foods.STEAK+","+ Foods.FISH.name());
+import java.util.ArrayList;
+import java.util.List;
 
+public class Bear extends Animal{
+    public Bear(int age, char gender, int health, int lifeExpectancy) {
+        super(age, gender, health, lifeExpectancy);
     }
 
     @Override
@@ -34,7 +35,30 @@ public class Bear extends Animal{
     }
 
     @Override
+    public List<Foods> edibleFoods() {
+        List<Foods> edible = new ArrayList<>();
+        if (canEat("STEAK")) {
+            edible.add(Foods.STEAK);
+        }
+        if (canEat("FISH")) {
+            edible.add(Foods.FISH);
+        }
+        return edible;
+    }
+
+    @Override
     public boolean aMonthPasses() {
-        return false;
+        if (getHealth() < 3) {
+            System.out.println("The bear is in poor health");
+            return false;
+        }
+        System.out.println("The bear is excellent");
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "Bear";
     }
 }
+

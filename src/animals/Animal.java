@@ -2,21 +2,23 @@ package animals;
 
 import enums.Foods;
 
+import java.util.List;
+
 public abstract class Animal {
   private   int age;
     private char gender;
-    private Foods foods;
+    private List<Foods> foods;
     private int health;
     private int lifeExpectancy;
     public Animal() {
     }
 
-    public Animal(int age, char gender, Foods foods, int health, int lifeExpectancy) {
+    public Animal(int age, char gender,int health,int lifeExpectancy) {
         this.age = age;
         this.gender = gender;
-        this.foods = foods;
-        this.health = health;
-        this.lifeExpectancy = lifeExpectancy;
+        this.health=health;
+        this.lifeExpectancy=lifeExpectancy;
+
     }
 
     public int getAge() {
@@ -35,11 +37,13 @@ public abstract class Animal {
         this.gender = gender;
     }
 
-    public Foods getFoods() {
+    public List<Foods> getFoods() {
         return foods;
     }
 
-    public abstract void setFoods(Foods foods);
+    public void setFoods(List<Foods> foods){
+        this.foods=foods;
+    }
 
     public int getHealth() {
         return health;
@@ -67,10 +71,14 @@ for(Foods eat:Foods.values()) {
         return health < 10;
     }
     public abstract  boolean eat(boolean ifEat);
-    public void decreaseHealth() {
-
+    public int decreaseHealth() {
+    if(eat(true)) {
+        return Math.min(10, health + 2);
+    }
+        return Math.max(0, health - 2);
     }
     public abstract void treat();
+    public abstract List<Foods> edibleFoods() ;
 
 
     public abstract boolean aMonthPasses();
