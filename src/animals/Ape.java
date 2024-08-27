@@ -14,7 +14,9 @@ public abstract class Ape extends Animal{
 
     @Override
     public void treat() {
-
+        if(eat(true)) {
+             Math.min(10, getHealth()+2);
+        }
     }
 
     @Override

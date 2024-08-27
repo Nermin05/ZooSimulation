@@ -5,13 +5,13 @@ import animals.BigCat;
 import animals.Elephant;
 import animals.Lion;
 import business.abstracts.ZooService;
+import enums.Foods;
+import exceptions.HasNoFood;
 import exceptions.TooMuchAnimals;
 import zookeepers.Zookeeper;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 public class ZooManager implements ZooService {
     EnclosureManager[] enclosureManagers;
@@ -64,69 +64,62 @@ public class ZooManager implements ZooService {
 
 
     @Override
-    public void readFile(String fileName) {//sehvlik var
-        try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                line = line.trim();
-                if (line.isEmpty()) {
-                    continue;
-                }
-                if (line.startsWith("enclosure:")) {
-                    String[] parts = line.split(":");
-                    if (parts.length == 2) {
-                        try {
-                            int waste = Integer.parseInt(parts[1].trim());
-                            enclosureCount++;
-                            System.out.println("Enclosure count: " + enclosureCount);
-                        } catch (NumberFormatException e) {
-                            System.err.println("Invalid waste value: " + parts[1]);
-                        }
-                    }
-                } else if (line.contains(":")) {
-                    String[] parts = line.split(":");
-                    if (parts.length == 2) {
-                        String type = parts[0].trim();
-                        try {
-                            int quantity = Integer.parseInt(parts[1].trim());
-                            foodStoreManager.addFood(type, quantity);
-                        } catch (NumberFormatException e) {
-                            System.err.println("Invalid quantity value: " + parts[1]);
-                        }
-                    }
-                } else if (line.contains(",")) {
-                    String[] parts = line.split(",");
-                    if (parts.length >= 4) {
-                        try {
-                            int age = Integer.parseInt(parts[0].trim());
-                            char gender = parts[1].trim().charAt(0);
-                            int health = Integer.parseInt(parts[2].trim());
-                            int lifeExpectancy = Integer.parseInt(parts[3].trim());
+    public void writeFile(String fileName) {
+        try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(fileName))) {
+            bufferedWriter.write("Zoo:\n");
 
-                            String animalType = parts.length > 4 ? parts[4].trim() : "";
-                            if (animalType.equalsIgnoreCase("lion")) {
-                                enclosureManager.addAnimal(new Lion(age, gender, health, lifeExpectancy));
-                            } else if (animalType.equalsIgnoreCase("elephant")) {
-                                enclosureManager.addAnimal(new Elephant(age, gender, health, lifeExpectancy));
-                            } else {
-                                System.err.println("Unknown animal type: " + animalType);
-                            }
-                        } catch (NumberFormatException e) {
-                            System.err.println("Invalid animal data: " + line);
-                        }
-                    } else {
-                        System.err.println("Malformed animal line: " + line);
-                    }
-                } else if (line.equalsIgnoreCase("playZookeeper")) {
-                    // Add zookeeper processing here if needed
+            int enclosureCount = 1;
+
+            for (EnclosureManager enclosureManager1 : enclosureManagers) {
+                bufferedWriter.write("Enclosure " + enclosureCount + ":\n");
+                enclosureCount++;
+
+                List<Animal> animals = enclosureManager1.animalList;
+                Set<String> uniqueAnimalTypes = new HashSet<>();
+
+                for (Animal animal : animals) {
+                    uniqueAnimalTypes.add(animal.getClass().getSimpleName());
                 }
+                for (String animalType : uniqueAnimalTypes) {
+                    int count = 0;
+                    for (Animal animal : animals) {
+                        if (animal.getClass().getSimpleName().equals(animalType)) {
+                            count++;
+                        }
+                    }
+                    bufferedWriter.write("  Animal: " + animalType + " Count: " + count + "\n");
+                }
+
+                for (Map.Entry<String, Integer> foods : enclosureManager1.enclosureFoodStore.entrySet()) {
+                    bufferedWriter.write("  Food: " + foods.getKey() + " Quantity: " + foods.getValue() + "\n");
+                }
+                List<Zookeeper> zookeepers = zookeeperList;
+                Set<String> uniqueZookeepers = new HashSet<>();
+
+                for (Zookeeper zookeeper : zookeepers) {
+                    uniqueZookeepers.add(zookeeper.getClass().getSimpleName());
+                }
+                for (String zookeeper : uniqueZookeepers) {
+                    int count = 0;
+                    for (Zookeeper zookeeper1 : zookeepers) {
+                        if (zookeeper1.getClass().getSimpleName().equals(zookeeper)) {
+                            count++;
+                        }
+                    }
+                    bufferedWriter.write("  Animal: " + zookeeper + " Count: " + count + "\n");
+                }
+
             }
         } catch (IOException e) {
-            throw new RuntimeException("File not found or error reading file: " + e.getMessage(), e);
-        } catch (TooMuchAnimals e) {
-            throw new RuntimeException("Error with too many animals: " + e.getMessage(), e);
+            throw new RuntimeException(e);
         }
     }
+
+    @Override
+    public void addZookeeper(Zookeeper zookeeper) {
+        zookeeperList.add(zookeeper);
+    }
+
 
 }
 

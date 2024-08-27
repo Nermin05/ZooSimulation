@@ -31,7 +31,7 @@ public class Chimpanzee extends Ape{
 
     @Override
     public void treat() {
-        if(playChase()<10) System.out.println(getHealth());
+        if(playChase()<10) System.out.println(getHealth()+2);
         else System.out.println(10);
     }
 

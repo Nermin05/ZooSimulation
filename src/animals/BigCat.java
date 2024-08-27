@@ -14,7 +14,7 @@ public abstract class BigCat extends Animal {
 public abstract int stroked();
     @Override
     public void treat() {
-        if(stroked()<10) System.out.println(getHealth());
+        if(stroked()<10) System.out.println(getHealth()+2);
         else System.out.println(10);    }
 
     @Override

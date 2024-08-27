@@ -8,22 +8,24 @@ import exceptions.NoAnimal;
 import exceptions.TooMuchAnimals;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class EnclosureManager implements EnclosureService {
     List<Animal> animalList;
-    List<Foods>  foodsList;
   private int waste=0;
   FoodStoreManager foodStoreManager;
+  Map<String,Integer> enclosureFoodStore;
     public EnclosureManager() {
     animalList=new ArrayList<>();
-    foodsList=new ArrayList<>();
     }
 
-    public EnclosureManager(List<Animal> animalList, FoodStoreManager foodStore, int waste) {
+    public EnclosureManager(List<Animal> animalList, FoodStoreManager foodStore) {
         this.animalList=animalList;
         this.foodStoreManager=foodStore;
-        this.waste=waste;
+        this.waste=0;
+        enclosureFoodStore=new HashMap<>();
     }
 
     public int getWaste() {
@@ -114,15 +116,31 @@ animalEat=true;
     }
 
     @Override
-    public void getFoodStore(Foods foodsNew) {
-    foodsList.add(foodsNew);
-    }
-
-    @Override
     public void aMonthPasses() {
 for(Animal animal:animalList) {
     animal.aMonthPasses();
 }
     }
+
+    @Override
+    public void bringFoods(String name,int count) {
+       if(foodStoreManager.ifExist(name)) {
+           enclosureFoodStore.put(name,count);
+           System.out.println("There is "+count+" "+name);
+       }
+    }
+
+    @Override
+    public void displayEnclosures() {
+        System.out.println("Animals in enclosure:");
+        for(Animal animal:animalList) {
+            System.out.println("There is "+animal+" in enclosure");
+        }
+        System.out.println("Foods in enclosure:");
+        for(Map.Entry<String,Integer> food:enclosureFoodStore.entrySet()) {
+            System.out.println("There is "+food.getValue()+" "+food.getKey());
+        }
+    }
+
 
 }

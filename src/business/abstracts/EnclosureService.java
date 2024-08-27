@@ -16,6 +16,7 @@ public interface EnclosureService {
     int currentWaste() throws HasNoFood;
     void removeWaste(int waste);
     int getWasteSize();
-    void getFoodStore(Foods foodsNew);
     void aMonthPasses();
+    void bringFoods(String name,int count);
+    void displayEnclosures();
 }

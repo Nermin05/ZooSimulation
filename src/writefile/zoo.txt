@@ -1,10 +1,16 @@
-zoo:
-steak:50
-hay:30
-enclosure:50
-hay:20
-steak:5
-celery:10
-lion:12,M,5,1
-lion:F,10,4
-playZookeeper:
+Zoo:
+Enclosure 1:
+  Animal: Bear Count: 2
+  Food: hay Quantity: 15
+  Animal: PhysioZookeeper Count: 1
+  Animal: PlayZooKeeper Count: 1
+Enclosure 2:
+  Animal: Lion Count: 2
+  Food: celery Quantity: 5
+  Animal: PhysioZookeeper Count: 1
+  Animal: PlayZooKeeper Count: 1
+Enclosure 3:
+  Animal: Gorilla Count: 2
+  Food: fruit Quantity: 5
+  Animal: PhysioZookeeper Count: 1
+  Animal: PlayZooKeeper Count: 1

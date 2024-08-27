@@ -72,10 +72,7 @@ for(Foods eat:Foods.values()) {
     }
     public abstract  boolean eat(boolean ifEat);
     public int decreaseHealth() {
-    if(eat(true)) {
-        return Math.min(10, health + 2);
-    }
-        return Math.max(0, health - 2);
+    return Math.max(0, health - 2);
     }
     public abstract void treat();
     public abstract List<Foods> edibleFoods() ;

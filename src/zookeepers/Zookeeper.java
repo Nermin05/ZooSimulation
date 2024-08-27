@@ -11,10 +11,12 @@ import exceptions.TooMuchFoods;
 import java.util.List;
 
 public class Zookeeper {
-private String name;
+    private String name;
+
     public String getName() {
         return name;
     }
+
     public void setName(String name) {
         this.name = name;
     }
@@ -23,17 +25,6 @@ private String name;
         this.name = name;
     }
 
-  public void moveFood(FoodStoreManager foodZoo, EnclosureManager foodEnclosure, int count, List<Foods> bringFoods) throws TooMuchFoods {
-if(count>20) {
-    throw new TooMuchFoods("Too much food for Enclosure");
-} else {
-    System.out.println(count+" items moved from Zoo to Enclosure");
-    for(int i=0;i<count;i++) {
-        foodEnclosure.getFoodStore(bringFoods.get(i));
-    }
-
-}
-    }
    public void cleanWaste(EnclosureManager foodEnclosure,int count) throws HasNoFood {
        int currentWaste = foodEnclosure.currentWaste();
       if(currentWaste>count) {

@@ -30,7 +30,7 @@ public class Penguin extends Animal{
 
     @Override
     public void treat() {
-        if(watchAFilm()<10) System.out.println(getHealth());
+        if(watchAFilm()<10) System.out.println(getHealth()+2);
         else System.out.println(10);
     }
 

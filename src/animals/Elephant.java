@@ -41,7 +41,7 @@ public class Elephant extends Animal{
 
     @Override
     public void treat() {
-       if(bath()<10) System.out.println(getHealth());
+       if(bath()<10) System.out.println(getHealth()+2);
        else System.out.println(10);
     }
 

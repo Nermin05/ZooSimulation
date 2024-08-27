@@ -30,7 +30,7 @@ public class Giraffe extends Animal{
 
     @Override
     public void treat() {
-        if(neckMessage()<10) System.out.println(getHealth());
+        if(neckMessage()<10) System.out.println(getHealth()+2);
         else System.out.println(10);
     }
 
